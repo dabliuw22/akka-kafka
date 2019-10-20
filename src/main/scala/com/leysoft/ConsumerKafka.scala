@@ -1,6 +1,7 @@
 package com.leysoft
 
 import akka.actor.ActorSystem
+import akka.kafka.ConsumerMessage.CommittableMessage
 import akka.kafka.{CommitterSettings, ConsumerSettings, Subscriptions}
 import akka.kafka.scaladsl.Consumer
 import akka.stream.ActorMaterializer
@@ -31,14 +32,20 @@ object ConsumerKafka extends App {
   val kafkaConsumer = consumerSettings.createKafkaConsumer()
   val committerSettings = CommitterSettings(system)
 
+  val process = (message: CommittableMessage[String, Event]) => {
+    system.log.info(s"Consumer event: ${message.record.value}")
+    message
+  }
+
+  val commit = (message: CommittableMessage[String, Event]) => {
+    system.log.info(s"Commit $message...")
+    Future(message.committableOffset)
+  }
+
   Consumer.committableSource[String, Event](consumerSettings, subscription)
-    .map { message =>
-      system.log.info(s"Consumer event: ${message.record.value}")
-      message
-    }.mapAsync(5) { message =>
-      system.log.info(s"Commit $message...")
-      Future(message.committableOffset)
-    }.runWith(Sink.foreach { event => system.log.info(s"Sink: $event") })
+    .map { process }
+    .mapAsync(5) { commit }
+    .runWith(Sink.foreach { event => system.log.info(s"Sink: $event") })
 
   /*
   Consumer.plainSource[String, Event](consumerSettings, subscription)
