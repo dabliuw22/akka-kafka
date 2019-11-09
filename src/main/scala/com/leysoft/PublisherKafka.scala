@@ -17,7 +17,7 @@ object PublisherKafka extends App {
   implicit val materializer = ActorMaterializer()
 
   val producerSettings = ProducerSettings(system, new StringSerializer(), EventSerializer())
-    .withBootstrapServers(`bootstrapServers`)
+    .withBootstrapServers(bootstrapServers)
     .withProperty(ProducerConfig.CLIENT_ID_CONFIG, `clientId`)
     .withProperty(ProducerConfig.BATCH_SIZE_CONFIG, `batchSize`)
     .withProperty(ProducerConfig.LINGER_MS_CONFIG, `lingerMilliseconds`)
