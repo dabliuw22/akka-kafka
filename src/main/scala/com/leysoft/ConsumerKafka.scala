@@ -7,8 +7,8 @@ import akka.kafka.scaladsl.Consumer
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.Sink
 
-import com.leysoft.Parameters._
-import com.leysoft.Parameters.ConsumerParameters._
+import Parameters._
+import Parameters.ConsumerParameters._
 
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer

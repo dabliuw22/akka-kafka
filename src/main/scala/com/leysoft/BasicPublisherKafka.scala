@@ -4,8 +4,8 @@ import java.util.Properties
 
 import akka.actor.ActorSystem
 
-import com.leysoft.Parameters._
-import com.leysoft.Parameters.ProducerParameters._
+import Parameters._
+import Parameters.ProducerParameters._
 
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord, RecordMetadata}
 import org.apache.kafka.common.serialization.StringSerializer

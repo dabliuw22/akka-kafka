@@ -6,8 +6,8 @@ import akka.kafka.scaladsl.Producer
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Sink, Source}
 
-import com.leysoft.Parameters._
-import com.leysoft.Parameters.ProducerParameters._
+import Parameters._
+import Parameters.ProducerParameters._
 
 import org.apache.kafka.clients.producer.{ProducerConfig, ProducerRecord}
 import org.apache.kafka.common.serialization.StringSerializer

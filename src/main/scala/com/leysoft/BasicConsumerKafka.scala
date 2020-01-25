@@ -6,8 +6,8 @@ import java.util.Properties
 
 import akka.actor.ActorSystem
 
-import com.leysoft.Parameters._
-import com.leysoft.Parameters.ConsumerParameters._
+import Parameters._
+import Parameters.ConsumerParameters._
 
 import org.apache.kafka.clients.consumer.{ConsumerConfig, KafkaConsumer, OffsetAndMetadata}
 import org.apache.kafka.common.TopicPartition
